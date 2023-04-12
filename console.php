@@ -2,7 +2,7 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Console\Commands\CountCommand;
+use App\Commands\CountCommand;
 use Symfony\Component\Console\Application;
 
 $app = new Application();

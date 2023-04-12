@@ -1,5 +1,5 @@
 <?php
-namespace Console\Commands;
+namespace App\Commands;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
@@ -11,15 +11,15 @@ use Symfony\Component\Finder\Finder;
 
 class CountCommand extends Command
 {
-    protected CONST ROOT_DIR = __DIR__ . '/../..';
+    private CONST ROOT_DIR = __DIR__ . '/../..';
 
     protected function configure() : void
     {
         $this
             ->setName('count')
-            ->setDescription('Count values in count files')
+            ->setDescription('Summarize values in count files')
             ->addOption('table', 't', null, 'Print result table')
-            ->addArgument('directory', InputArgument::OPTIONAL, 'Change searching directory', self::ROOT_DIR);
+            ->addArgument('directory', InputArgument::OPTIONAL, 'Change search directory', self::ROOT_DIR);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -42,7 +42,7 @@ class CountCommand extends Command
     private function count(OutputInterface $output, $flagPrintTable, $rootPath) : void
     {
         $regex = '/^-?\d+(\.\d+)?$/';
-        $split = "/[\s,]+/";
+        $split = "/[\s,;]+/";
 
         $finder = new Finder();
         $finder->files()->in($rootPath)->name('count');
